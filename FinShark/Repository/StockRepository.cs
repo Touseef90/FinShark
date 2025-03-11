@@ -67,5 +67,10 @@ namespace FinShark.Repository
 
             return stockModel;
         }
+
+        public async Task<bool> StockExist(int id)
+        {
+            return await _context.Stocks.AnyAsync(x => x.Id == id);
+        }
     }
 }
