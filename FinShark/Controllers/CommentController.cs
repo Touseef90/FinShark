@@ -55,5 +55,19 @@ namespace FinShark.Controllers
             await _commentRepo.CreateAsync(commentModel);
             return CreatedAtAction(nameof(GetById), new { id = commentModel.Id }, commentModel.ToCommentDto());
         }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateCommentRequestDto updateDto)
+        {
+            var commentModel = await _commentRepo.UpdateAsync(id, updateDto.ToCommentFromUpdateDto());
+
+            if (commentModel == null)
+            {
+                return NotFound("Comment not found");
+            }
+
+            return Ok();
+        }
     }
 }
