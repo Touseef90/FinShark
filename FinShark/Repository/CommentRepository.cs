@@ -21,6 +21,22 @@ namespace FinShark.Repository
             return commentModel;
         }
 
+        public async Task<Comment?> DeleteAsync(int id)
+        {
+            var existingModel = await _context.Comments.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (existingModel == null)
+            {
+                return null;
+            }
+
+            _context.Comments.Remove(existingModel);
+
+            await _context.SaveChangesAsync();
+
+            return existingModel;
+        }
+
         public async Task<List<Comment>> GetAllAsync()
         {
             return await _context.Comments.ToListAsync();
