@@ -11,5 +11,7 @@ namespace FinShark.Models
         public DateTime CreatedOn { get; set; } = DateTime.Now;
         public int? StockId { get; set; } // Foreign key linking the comment to a specific stock
         public Stock? Stock { get; set; } // Navigation property for accessing the related Stock entity i.e. different parts of stock
+        public string AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
     }
 }
